@@ -292,10 +292,23 @@ lsof -ti:5000 | xargs kill -9
 - CORS is restricted to specified `CLIENT_URL`
 - All item endpoints require authentication
 
-## Author
+## 👨‍💻 Author
+
 Amiya Krishna Chaurasiya
 
-## License
+B.Tech CSE Student
 
-MIT
+Aspiring Data Scientist and AI/ML Engineer
+
+GitHub: https://github.com/Amiya-Krishna
+
+LinkedIn: https://www.linkedin.com/in/amiya-krishna
+
+## ⭐ Support
+
+If you like this project:
+
+⭐ Star the repository
+🍴 Fork it
+🤝 Contribute
 
