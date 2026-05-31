@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+  mongodb:
+    image: mongo:7-alpine
+    container_name: grocery_mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DB: grocery
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  server:
+    build: ./server
+    container_name: grocery_api
+    ports:
+      - "5000:5000"
+    environment:
+      MONGO_URI: mongodb://mongodb:27017/grocery
+      JWT_SECRET: ${JWT_SECRET:-your_jwt_secret_key_change_in_production}
+      NODE_ENV: production
+      CLIENT_URL: http://localhost:5173
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    restart: unless-stopped
+
+  client:
+    build: ./client
+    container_name: grocery_web
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: http://localhost:5000/api
+    depends_on:
+      - server
+    restart: unless-stopped
+
+volumes:
+  mongo-data:

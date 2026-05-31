@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root {
+    background: #ecfdf5;  /* bg-emerald-50 ka hex */
+    color: #111827;
+    font-family: system-ui;
+    min-height: 100%;
+  }
+}
+
+@layer components {
+  .input {                   /* ← @layer components mein daala */
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #1f2937;
+    border-radius: 8px;
+    outline: none;
+  }
+}
